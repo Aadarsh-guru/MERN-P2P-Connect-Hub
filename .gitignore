@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+package-lock.json
+client/node_modules
+client/dist
+client/.env
+client/package-lock.json
