@@ -10,7 +10,7 @@ const redisClient = new Redis(process.env.REDIS_URL as string);
 const REDIS_KEY = process.env.REDIS_KEY as string || "users";
 
 // socket server listeners
-const initializeSocketIo = (io: Server) => {
+const initializeSocketIo = async (io: Server) => {
 
     //On restart of the server clear the previous values
     await redisClient.del(REDIS_KEY);
