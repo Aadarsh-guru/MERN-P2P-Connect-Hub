@@ -3,7 +3,7 @@ import { Redis } from "ioredis";
 import { getRandomUserId } from "../utils/socket.utils";
 import ACTIONS from "../constants/socket.actions";
 
-// created a redis instance to keep trake for active users in memory.
+// created a redis instance to keep track for active users in memory.
 const redisClient = new Redis(process.env.REDIS_URL as string);
 
 // key for storing data into the redis
@@ -11,6 +11,10 @@ const REDIS_KEY = process.env.REDIS_KEY as string || "users";
 
 // socket server listeners
 const initializeSocketIo = (io: Server) => {
+
+    //On restart of the server clear the previous values
+    await redisClient.del(REDIS_KEY);
+    
     return io.on('connection', async (socket) => {
         try {
 
